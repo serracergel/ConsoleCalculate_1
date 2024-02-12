@@ -21,31 +21,43 @@ namespace ConsoleCalculate_1
       
         static void Main(string[] args)
         {
-            Console.WriteLine("Please enter number");
-            string input = Console.ReadLine();
-
+            string entry=null;
             string numbers = null;
-            foreach (char item in input)
+            do
             {
-                if (item != ' ') numbers += item;
-            
+                  
+                    Console.WriteLine("Please enter number");
+                    string input = Console.ReadLine();
 
-            }
+                    
+                    foreach (char item in input)
+                    {
+                        if (item != ' ') numbers += item;
+
+                    }
+
+                    try
+                    {
+                        float result = Evaluate(numbers);
+                        numbers = result.ToString();//buradaki input en bastaki input olucak
+                        Console.WriteLine($"Result = {result}\nIf you want to continue the calculation please type \"ok\" or press enter to exit the program");
+                        //Console.ReadLine();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine($"Hata: {ex.Message}");
+
+                    }
+
+                    entry=Console.ReadLine();
+                
+               
+
+            } while (entry=="ok");
            
-            try
-            {
-                float result = Evaluate(input);
-                Console.WriteLine($"Result = {result}");
-                //Console.ReadLine();
 
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Hata: " + ex.Message);
-
-            }
-            
-            Console.ReadLine();
+           
             
         }
 
@@ -57,7 +69,8 @@ namespace ConsoleCalculate_1
             //readme ekle hangi islemleri yapabiliyor ve projenin genel aciklamasini
 
             for (int i = 0; i < expression.Length; i++)
-            {
+            {// ½25
+                
                 if (expression[i] == '½')
                 {
                     //sıfırlayabilirim ve bu isaret sonraki sayilari farkli degiskende toplayip onlari math sprt ile hesaba sokabilirim 
