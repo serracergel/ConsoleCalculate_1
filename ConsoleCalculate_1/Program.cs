@@ -18,50 +18,60 @@ namespace ConsoleCalculate_1
         //    }
         //}
         #endregion
-      
+
+        static string input;
+        static string numbers;
+        static string entry;
         static void Main(string[] args)
         {
-            string entry=null;
-            string numbers = null;
+
+
+
             do
             {
-                  
-                    Console.WriteLine("Please enter number");
-                    string input = Console.ReadLine();
-
-                    
-                    foreach (char item in input)
+                 if (input == null)
                     {
-                        if (item != ' ') numbers += item;
+                        Console.WriteLine("\"-\"=Subtract \n \"+\"=Add \n \"/\"=Divide \n \"*\"=Multiply \n Please type your calculation");
+                        input = Console.ReadLine();
 
                     }
+                   if (input[0] != '/' && input[0] != '*' && input[0] != '-' && input[0] != '+') numbers = null;
+                   GetTheNumbers();
 
                     try
                     {
                         float result = Evaluate(numbers);
-                        numbers = result.ToString();//buradaki input en bastaki input olucak
-                        Console.WriteLine($"Result = {result}\nIf you want to continue the calculation please type \"ok\" or press enter to exit the program");
-                        //Console.ReadLine();
+                        numbers = result.ToString(); //buradaki input en bastaki input olucak
+                        Console.WriteLine($"Result = {result}\nIf you want to continue the calculation please type or press any key to exit the program");
+
 
                     }
                     catch (Exception ex)
                     {
                         Console.WriteLine($"Hata: {ex.Message}");
 
+
                     }
 
-                    entry=Console.ReadLine();
-                
-               
-
-            } while (entry=="ok");
-           
-
+                    entry = Console.ReadLine();
+                    input = entry;
+                 
+            } while (entry!=null);
            
             
         }
 
-       
+        private static string GetTheNumbers()
+        {
+           
+            foreach (char item in input)
+            {
+                if (item != ' ') numbers += item;
+
+            }
+
+            return numbers;
+        }
 
         static float Evaluate(string expression)
         {
@@ -89,6 +99,9 @@ namespace ConsoleCalculate_1
             return Convert.ToSingle(dataTable.Compute(expression,""),CultureInfo.InvariantCulture);
 
         }
+
+
+
     }
     
 }
