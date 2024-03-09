@@ -22,7 +22,7 @@ namespace ConsoleCalculate_1
         static void Main(string[] args)
         {
            
-            Console.WriteLine("Please use '*' for multiplication and '/' for division\nNotice:If the ongoing calculation begins with a negative number,write it in parentheses (ex:(-5) - 4).\nPlease type your calculation(ex:15-2/5)\n");
+            Console.WriteLine("Please use '*' for multiplication and '/' for division\nNotice:If the ongoing calculation begins with a negative number,write it in parentheses (ex:(-5) - 4).To exit the game, please click the cross on the top right\nPlease type your calculation(ex:15-2/5)\n");
 
             string input = Console.ReadLine();
             string numbers = null;
