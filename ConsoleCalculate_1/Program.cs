@@ -9,16 +9,7 @@ namespace ConsoleCalculate_1
 {
     internal class Program
     {
-        #region 2.way
-        //for (int i= 0; i < input.Length ; i++)
-        //{
-        //    if (input[i] != ' ')
-        //    {
-        //        numbers += input[i];
-        //    }
-        //}
-        #endregion
-        //readme ekle hangi islemleri yapabiliyor ve projenin genel aciklamasini
+       
         static void Main(string[] args)
         {
            
