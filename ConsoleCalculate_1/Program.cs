@@ -18,86 +18,70 @@ namespace ConsoleCalculate_1
         //    }
         //}
         #endregion
-
-        static string input;
-        static string numbers;
-        static string entry;
+        //readme ekle hangi islemleri yapabiliyor ve projenin genel aciklamasini
         static void Main(string[] args)
         {
+           
+            Console.WriteLine("Please use '*' for multiplication and '/' for division\nNotice:If the ongoing calculation begins with a negative number,write it in parentheses (ex:(-5) - 4).\nPlease type your calculation(ex:15-2/5)\n");
 
-
-
+            string input = Console.ReadLine();
+            string numbers = null;
+            string entry;
             do
             {
-                 if (input == null)
+                try
+                {
+                    if (input[0] != '/' && input[0] != '*' && input[0] != '-' && input[0] != '+') numbers = null;
+                 
+                    foreach (char item in input)
                     {
-                        Console.WriteLine("\"-\"=Subtract \n \"+\"=Add \n \"/\"=Divide \n \"*\"=Multiply \n Please type your calculation");
-                        input = Console.ReadLine();
+                        if (item != ' ') numbers += item;
 
                     }
-                   if (input[0] != '/' && input[0] != '*' && input[0] != '-' && input[0] != '+') numbers = null;
-                   GetTheNumbers();
 
-                    try
-                    {
-                        float result = Evaluate(numbers);
-                        numbers = result.ToString(); //buradaki input en bastaki input olucak
-                        Console.WriteLine($"Result = {result}\nIf you want to continue the calculation please type or press any key to exit the program");
+                    numbers = NumberControl(numbers);
 
 
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine($"Hata: {ex.Message}");
+                    float result = Evaluate(numbers);
+                    //We will take it as input to continue the calculation
 
+                    numbers = NumberControl(result.ToString());
 
-                    }
+                    Console.WriteLine($"Result = {result}\nIf you want to continue the calculation please type or press enter to exit the program");
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    Console.WriteLine("To exit the game,please click the cross on the top right ");
+                   
+                }
+                catch (Exception ex)
+                {
+
+                    Console.WriteLine($"Hata: {ex.Message}");
+
+                }
 
                     entry = Console.ReadLine();
                     input = entry;
                  
             } while (entry!=null);
-           
-            
+
+
+          
         }
 
-        private static string GetTheNumbers()
+        private static string NumberControl(string numberToCheck)
         {
-           
-            foreach (char item in input)
-            {
-                if (item != ' ') numbers += item;
-
-            }
-
-            return numbers;
+            string numberToAdd = numberToCheck;
+             return numberToAdd.Replace(',', '.');
+            
         }
 
         static float Evaluate(string expression)
         {
-            //uslu sayi islemi karekok ekle
-            //readme ekle hangi islemleri yapabiliyor ve projenin genel aciklamasini
-
-            for (int i = 0; i < expression.Length; i++)
-            {// ½25
-                
-                if (expression[i] == '½')
-                {
-                    //sıfırlayabilirim ve bu isaret sonraki sayilari farkli degiskende toplayip onlari math sprt ile hesaba sokabilirim 
-                    
-                    string deneme=expression[i].ToString();
-                    string test=expression.Replace(deneme, "Math.Sqrt(").Replace("16","16)");
-                }
-
-            }
-
-            //expression =expression.Replace("½","Math.Sqrt(");
-
-
             System.Data.DataTable dataTable = new System.Data.DataTable();
             
             return Convert.ToSingle(dataTable.Compute(expression,""),CultureInfo.InvariantCulture);
-
         }
 
 
